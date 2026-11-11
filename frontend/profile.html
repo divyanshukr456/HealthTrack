@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Health profile · HealthTrack</title>
+<meta name="color-scheme" content="light dark">
+<script src="js/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%230E7C86'/%3E%3Cpath d='M6 17h6l2-5 3 9 2-4h7' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body class="booting" data-page="profile" data-title="Health profile">
+<div class="boot-loader" role="status" aria-label="Loading"><span class="spinner"></span></div>
+<main id="content">
+  <div class="profile-grid">
+    <section class="card" aria-labelledby="accTitle">
+      <div class="card-head"><h2 id="accTitle">Account</h2></div>
+      <dl class="kv" id="account"></dl>
+      <p class="hint" style="margin-top:16px">Name, email and date of birth can't be changed here yet.</p>
+    </section>
+    <section class="card" aria-labelledby="hpTitle">
+      <div class="card-head"><div><h2 id="hpTitle">Health profile</h2><p>Keep this up to date so your targets stay relevant.</p></div></div>
+      <div id="loading" class="skel-row"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+      <div class="form-error" id="loadError" role="alert" hidden></div>
+      <form id="profileForm" novalidate hidden>
+        <div id="pfRoot" class="profile-sections"></div>
+        <div class="form-error" role="alert" hidden style="margin-top:18px"></div>
+        <div class="actions" style="margin-top:22px"><button class="btn primary" id="saveBtn" type="submit">Save changes</button></div>
+      </form>
+    </section>
+  </div>
+</main>
+<noscript><p style="padding:24px">HealthTrack needs JavaScript to run. Please enable it and reload.</p></noscript>
+<script src="js/config.js"></script>
+<script src="js/core.js"></script>
+<script src="js/profile-form.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>

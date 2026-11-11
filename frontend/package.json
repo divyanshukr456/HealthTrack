@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chart.js": "^4.6.1",
+    "lucide": "^1.71.0"
+  }
+}

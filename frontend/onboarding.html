@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up your profile · HealthTrack</title>
+<meta name="color-scheme" content="light dark">
+<script src="js/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%230E7C86'/%3E%3Cpath d='M6 17h6l2-5 3 9 2-4h7' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body class="booting" data-page="onboarding">
+<div class="boot-loader" role="status" aria-label="Loading"><span class="spinner"></span></div>
+<div class="wizard-page">
+  <div class="wizard">
+    <div class="wizard-head">
+      <a class="brand" href="onboarding.html" style="padding:0"><span style='display:inline-flex;width:30px;height:30px'><svg viewBox='0 0 32 32' aria-hidden='true'><rect width='32' height='32' rx='10' fill='#0E7C86'/><circle cx='16' cy='16' r='8.5' fill='none' stroke='#fff' stroke-opacity='.35' stroke-width='2.4'/><path d='M6 17h6l2-5 3 9 2-4h7' fill='none' stroke='#fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/></svg></span><span>HealthTrack</span></a>
+      <span class="actions"><span id="themeSlot"></span><button class="btn ghost sm" type="button" id="logoutBtn">Log out</button></span>
+    </div>
+    <div><h1 id="welcome">Welcome</h1><p class="muted">It takes about two minutes to set up your health profile.</p></div>
+    <ol class="stepper" id="stepper" aria-label="Progress"></ol>
+    <section class="card">
+      <div class="card-head" style="display:block"><h2 id="stepTitle"></h2><p id="stepText"></p></div>
+      <form id="wizardForm" novalidate class="stack">
+        <dl class="review" id="review" hidden></dl>
+        <div id="pfRoot" class="stack"></div>
+        <div class="form-error" role="alert" hidden></div>
+        <div class="actions" style="justify-content:space-between">
+          <button type="button" class="btn ghost" id="backBtn">Back</button>
+          <span class="actions"><button type="button" class="btn primary" id="nextBtn">Continue</button><button type="submit" class="btn primary" id="finishBtn">Finish setup</button></span>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+<noscript><p style="padding:24px">HealthTrack needs JavaScript to run. Please enable it and reload.</p></noscript>
+<script src="js/config.js"></script>
+<script src="js/core.js"></script>
+<script src="js/profile-form.js"></script>
+<script src="js/onboarding.js"></script>
+</body>
+</html>

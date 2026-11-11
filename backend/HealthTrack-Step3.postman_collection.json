@@ -1,0 +1,531 @@
+{
+  "info": {
+    "name": "HealthTrack - Step 3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Run Auth > Login first (the token cookie is stored automatically), then run each folder top to bottom."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"Passw0rd!123\",\n  \"dob\": \"1995-05-05\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Passw0rd!123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Daily Records",
+      "item": [
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();",
+                  "if(j.data&&j.data.item){pm.collectionVariables.set(\"dailyId\",j.data.item._id);}",
+                  "pm.test(\"success\",()=>pm.expect(j.success).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/daily-records",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"2026-11-09\",\n  \"steps\": 8000,\n  \"waterIntake\": 2000,\n  \"weight\": 70.5,\n  \"caloriesBurned\": 400\n}"
+            }
+          }
+        },
+        {
+          "name": "List (filters + pagination)",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/daily-records?page=1&limit=20&order=desc"
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/daily-records/{{dailyId}}"
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/daily-records/{{dailyId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"steps\": 9500\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/daily-records/{{dailyId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workouts",
+      "item": [
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();",
+                  "if(j.data&&j.data.item){pm.collectionVariables.set(\"workoutId\",j.data.item._id);}",
+                  "pm.test(\"success\",()=>pm.expect(j.success).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/workouts",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"exerciseName\": \"Running\",\n  \"category\": \"cardio\",\n  \"duration\": 30,\n  \"caloriesBurned\": 300,\n  \"date\": \"2026-11-09\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List (filters + pagination)",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/workouts?page=1&limit=20&order=desc"
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/workouts/{{workoutId}}"
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/workouts/{{workoutId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"duration\": 45\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/workouts/{{workoutId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sleep",
+      "item": [
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();",
+                  "if(j.data&&j.data.item){pm.collectionVariables.set(\"sleepId\",j.data.item._id);}",
+                  "pm.test(\"success\",()=>pm.expect(j.success).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/sleep",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sleepTime\": \"2026-11-08T23:30:00+05:30\",\n  \"wakeTime\": \"2026-11-09T06:45:00+05:30\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List (filters + pagination)",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/sleep?page=1&limit=20&order=desc"
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/sleep/{{sleepId}}"
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/sleep/{{sleepId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"wakeTime\": \"2026-11-09T07:15:00+05:30\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/sleep/{{sleepId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Food",
+      "item": [
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();",
+                  "if(j.data&&j.data.item){pm.collectionVariables.set(\"foodId\",j.data.item._id);}",
+                  "pm.test(\"success\",()=>pm.expect(j.success).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/food",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"foodName\": \"Oats\",\n  \"mealType\": \"breakfast\",\n  \"quantity\": 50,\n  \"quantityUnit\": \"g\",\n  \"calories\": 190,\n  \"protein\": 7,\n  \"carbs\": 33,\n  \"fat\": 3.5,\n  \"date\": \"2026-11-09\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List (filters + pagination)",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/food?page=1&limit=20&order=desc"
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/food/{{foodId}}"
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/food/{{foodId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"calories\": 200\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/food/{{foodId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Goals",
+      "item": [
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j=pm.response.json();",
+                  "if(j.data&&j.data.item){pm.collectionVariables.set(\"goalId\",j.data.item._id);}",
+                  "pm.test(\"success\",()=>pm.expect(j.success).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/goals",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"goalType\": \"weight_loss\",\n  \"startValue\": 75,\n  \"targetValue\": 65,\n  \"deadline\": \"2027-01-31\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List (filters + pagination)",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/goals?page=1&limit=20&order=desc"
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/goals/{{goalId}}"
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/goals/{{goalId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentValue\": 70\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/goals/{{goalId}}"
+          }
+        }
+      ]
+    }
+  ]
+}

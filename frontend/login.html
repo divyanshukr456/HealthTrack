@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in · HealthTrack</title>
+<meta name="color-scheme" content="light dark">
+<script src="js/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%230E7C86'/%3E%3Cpath d='M6 17h6l2-5 3 9 2-4h7' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body class="booting" data-page="login">
+<div class="boot-loader" role="status" aria-label="Loading"><span class="spinner"></span></div>
+<div class="auth">
+  <aside class="auth-art">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true" style="width:30px;height:30px"><rect width="32" height="32" rx="10" fill="#14a3b0"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2.4"/><path d="M6 17h6l2-5 3 9 2-4h7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>HealthTrack</span></a>
+    <div><h2>Every step, meal and night of sleep in one place.</h2><p>Log your day in under a minute, then watch your trends take shape.</p></div>
+    <svg class="art" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke-width="13" stroke-linecap="round" transform="rotate(-90 100 100)"><circle cx="100" cy="100" r="90" stroke="#ffffff" stroke-opacity=".1"/><circle cx="100" cy="100" r="90" stroke="#2dd4bf" stroke-dasharray="430 566"/><circle cx="100" cy="100" r="71" stroke="#ffffff" stroke-opacity=".1"/><circle cx="100" cy="100" r="71" stroke="#5bb0f5" stroke-dasharray="300 446"/><circle cx="100" cy="100" r="52" stroke="#ffffff" stroke-opacity=".1"/><circle cx="100" cy="100" r="52" stroke="#8c9bff" stroke-dasharray="240 327"/></g></svg>
+  </aside>
+  <main class="auth-main">
+    <span class="auth-theme" id="themeSlot"></span>
+    <div class="auth-card">
+      <div><h1>Welcome back</h1><p class="muted">Log in to see how today is going.</p></div>
+      <div class="form-ok" id="notice" role="status" hidden></div>
+      <form id="loginForm" class="stack" novalidate>
+        <div class="field" data-field="email"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" autofocus><small class="field-error" role="alert"></small></div>
+      <div class="field" data-field="password"><label for="password">Password</label><div class="input-wrap"><input id="password" name="password" type="password" autocomplete="current-password"><button type="button" data-toggle-pw="password" aria-pressed="false">Show</button></div><small class="field-error" role="alert"></small></div>
+        <div class="form-error" role="alert" hidden></div>
+        <button class="btn primary block" type="submit" id="submitBtn">Log in</button>
+      </form>
+      <p class="alt">New to HealthTrack? <a href="register.html">Create an account</a></p>
+    </div>
+  </main>
+</div>
+<noscript><p style="padding:24px">HealthTrack needs JavaScript to run. Please enable it and reload.</p></noscript>
+<script src="js/config.js"></script>
+<script src="js/core.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
